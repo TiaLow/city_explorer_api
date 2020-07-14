@@ -31,9 +31,11 @@ This application will utilize a front-end where the user can come to the webpage
 
 01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
 
-07-13-2020 time - This is what happened at this time
+07-13-2020 3:35pm - Dependencies are established, files scaffolded 
 
-07-13-2020 time - This is what happened at this time
+07-13-2020 3:50pm - Application is deployed to Heroku for first test
+
+07-13-2020 5:25pm - Created route for /location, confirmed its pulling lat and lon data  
 
 07-13-2020 time - This is what happened at this time
 
@@ -58,13 +60,13 @@ Actual time needed to complete: 1.5hr
 
 2. Locations
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 1 hr
 
-Start time: _____
+Start time: 4:00pm
 
-Finish time: _____
+Finish time: 5:30pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1.5 hr
 
 
 3. Weather
