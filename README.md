@@ -13,12 +13,16 @@ This application will utilize a front-end where the user can come to the webpage
 
 ## Getting Started
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
-- User needs to build server
-- Need to npm init to create package.json
-- npm i
-- User needs to install express, dotenv, cors via npm
-- npm install -S 'thing'
-- Scaffold server.js to connect, test in terminal using nodemon
+
+- User should install libraries on your machine (npm install -S...)
+  - express
+  - dotenv
+  - cors
+
+  - (npm i will install for short term)
+
+- User should create a .env file
+
 
 ## Architecture
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
