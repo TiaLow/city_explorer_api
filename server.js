@@ -30,17 +30,25 @@ app.get('/location', (request, response) => {
 
 app.get('/weather', (request, response) => {
 
+  try{
+    let weather = require('./data/weather.json');
 
-  let weather = require('./data/weather.json');
+    let weatherArray = [];
+    weather.data.forEach(weatherTime => {
+      weatherArray.push(new Weather(weatherTime));
+    })
 
-  let weatherArray = [];
-  weather.data.forEach(weatherTime => {
-    weatherArray.push(new Weather(weatherTime));
-  })
+    response.send(weatherArray);
+  } catch(error){
+    console.log('ERROR', error);
+    response.status(500).send('You did not enter a correct location! Please try again.');
+  }
 
-  response.send(weatherArray);
+});
 
-})
+// app.get('*', (request, response) => {
+//   response.status(404).send('page not found');
+// })
 
 function Location(location, obj){
   this.latitude = obj[0].lat;

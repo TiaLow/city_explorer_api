@@ -27,9 +27,7 @@ This application will utilize a front-end where the user can come to the webpage
 - Using cors
 
 ## Change Log
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an examples:
 
-01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
 
 07-13-2020 3:35pm - Dependencies are established, files scaffolded 
 
@@ -37,16 +35,20 @@ This application will utilize a front-end where the user can come to the webpage
 
 07-13-2020 5:25pm - Created route for /location, confirmed its pulling lat and lon data  
 
-07-13-2020 5:45pm - Confirmed Heroku-deployed app is function correctly by sending data to the webpage
+07-13-2020 5:45pm - Confirmed Heroku-deployed app is functioning correctly by sending data to the webpage
 
 07-13-2020 6:20pm - Created route for /weather, confirmed it's pulling array of dates and forecasts
 
-07-13-2020 time - 
+07-13-2020 6:30pm - Confirmed Heroku-deployed app is functioning correctly by sending the weather array data to webpage
+
+07-13-2020 10:20pm - Confirmed error message syntax multiple times, not seeing epxlicit 500 errror, not quite sure how to test further. TBC! 
+
 
 
 ## Credits and Collaborations
 
 - Worked on Lab 6 with Blake Romero
+- Chance Harmon contributed with help as TA 
 
 
 ## Feature Tasks - Time Estimates
@@ -79,18 +81,18 @@ Estimate of time needed to complete: 1 hr
 
 Start time: 5:55pm
 
-Finish time: _____
+Finish time: 6:30pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 35 min
 
 
 4. Errors
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 45 mins
 
-Start time: _____
+Start time: 6:35pm, 10pm
 
-Finish time: _____
+Finish time: 6:50, 10:20pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: (worked for 35 mins)
 
