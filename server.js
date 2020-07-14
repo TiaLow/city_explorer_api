@@ -16,7 +16,7 @@ app.use(cors());
 
 
 // gets the PORT variable from our .env file
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3001;
 
 
 // back end event listener on the location route
@@ -69,7 +69,7 @@ function Weather(object){
 
 
 
-// console log to see if PORT is listening
+// turn it on, see if PORT is listening
 app.listen(PORT, () => {
   console.log(`listening on ${PORT}`);
 })
