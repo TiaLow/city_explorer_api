@@ -37,7 +37,11 @@ This application will utilize a front-end where the user can come to the webpage
 
 07-13-2020 5:25pm - Created route for /location, confirmed its pulling lat and lon data  
 
-07-13-2020 time - This is what happened at this time
+07-13-2020 5:45pm - Confirmed Heroku-deployed app is function correctly by sending data to the webpage
+
+07-13-2020 6:20pm - Created route for /weather, confirmed it's pulling array of dates and forecasts
+
+07-13-2020 time - 
 
 
 ## Credits and Collaborations
@@ -71,9 +75,9 @@ Actual time needed to complete: 1.5 hr
 
 3. Weather
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 1 hr
 
-Start time: _____
+Start time: 5:55pm
 
 Finish time: _____
 

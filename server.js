@@ -26,18 +26,32 @@ app.get('/location', (request, response) => {
   const obj = new Location(city, geoData);
 
   response.send(obj);
-
-
 });
 
+app.get('/weather', (request, response) => {
 
 
+  let weather = require('./data/weather.json');
+
+  let weatherArray = [];
+  weather.data.forEach(weatherTime => {
+    weatherArray.push(new Weather(weatherTime));
+  })
+
+  response.send(weatherArray);
+
+})
 
 function Location(location, obj){
   this.latitude = obj[0].lat;
   this.longitude = obj[0].lon;
   this.search_query = location;
   this.formatted_query = obj[0].display_name;
+}
+
+function Weather(object){
+  this.time = object.datetime;
+  this.forecast = object.weather.description;
 }
 
 
