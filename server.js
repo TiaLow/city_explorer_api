@@ -44,10 +44,16 @@ app.get('/weather', (request, response) => {
 
   let weather = require('./data/weather.json');
 
-  let weatherArray = [];
-  weather.data.forEach(weatherTime => {
-    weatherArray.push(new Weather(weatherTime));
+  // let weatherArray = [];
+  // weather.data.forEach(weatherTime => {
+  //   weatherArray.push(new Weather(weatherTime));
+  // })
+
+  let weatherArray = weather.data.map(weatherTime =>{
+    return new Weather(weatherTime);
   })
+
+  // console.log(weatherArray);
 
   response.send(weatherArray);
 
@@ -62,7 +68,7 @@ function Location(location, obj){
 }
 
 function Weather(object){
-  this.time = object.datetime;
+  this.time = new Date(object.datetime).toDateString();
   //if something is broken, datetime might not work, may need to access valid_date instead
   this.forecast = object.weather.description;
 }
