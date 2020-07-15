@@ -21,7 +21,7 @@ const PORT = process.env.PORT || 3001;
 
 
 // back end event listener on the location route
-app.get('/location', handleLocation)
+app.get('/location', handleLocation);
 
 function handleLocation(request, response){
 
@@ -46,7 +46,7 @@ function handleLocation(request, response){
       response.status(200).send(obj);
     }).catch((error) => {
       console.log('ERROR', error);
-      response.status(500).send('something went wrong, we are working on this');
+      response.status(500).send('Something went wrong with your location request, we are working on this!');
     })
 }
 
@@ -54,11 +54,7 @@ function handleLocation(request, response){
 // back end listener for the weather route
 app.get('/weather', handleWeather);
 
-
 function handleWeather(request, response){
-
-  // console.log(request.query.latitude);
-  // let weather = require('./data/weather.json');
 
   let url = 'https://api.weatherbit.io/v2.0/forecast/daily';
   let cityLatitude = request.query.latitude;
@@ -73,6 +69,7 @@ function handleWeather(request, response){
     format: 'json',
   }
 
+
   superagent.get(url)
     .query(weatherQueryParams)
     .then(results => {
@@ -80,11 +77,47 @@ function handleWeather(request, response){
       let weatherArray = results.body.data.map(resultObject =>{
         return new Weather(resultObject);
       })
-      response.send(weatherArray);
 
+      response.status(200).send(weatherArray);
+
+    }).catch((error) => {
+      console.log('ERROR', error);
+      response.status(500).send('Something went wrong with your weather request, we are working on this!');
     })
 }
 
+
+app.get('/trails', handleTrails);
+
+function handleTrails(request, response){
+
+  let url = 'https://www.hikingproject.com/data/get-trails';
+
+  let trailQueryParams = {
+    key: process.env.TRAIL_API_KEY,
+    lat: request.query.latitude,
+    lon: request.query.longitude,
+    maxResults: 10,
+  }
+
+  superagent.get(url)
+    .query(trailQueryParams)
+    .then(results => {
+
+      let trailArray = results.body.trails.map(resultObj =>{
+        return new Trails(resultObj);
+      })
+
+      response.status(200).send(trailArray);
+
+    }).catch((error) => {
+      console.log('ERROR', error);
+      response.status(500).send('Something went wrong with your trail request, we are working on this!');
+    })
+}
+
+
+// ====================================== CONSTRUCTORS ============================
 
 function Location(location, obj){
   this.latitude = obj[0].lat;
@@ -99,6 +132,23 @@ function Weather(object){
   this.forecast = object.weather.description;
 }
 
+function Trails(trailObject){
+  this.name = trailObject.name;
+  this.location = trailObject.location;
+  this.length = trailObject.length;
+  this.stars = trailObject.stars;
+  this.star_votes = trailObject.starVotes;
+  this.summary = trailObject.summary;
+  this.trail_url = trailObject.url;
+  this.conditions = trailObject.conditionStatus + ' & ' + trailObject.conditionDetails;
+  this.condition_date = new Date(trailObject.conditionDate).toDateString();
+  this.condition_time = new Date(trailObject.conditionDate).toLocaleTimeString();
+}
+
+
+
+
+// ================================================================================
 
 
 // turn it on, see if PORT is listening
