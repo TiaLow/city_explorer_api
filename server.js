@@ -10,7 +10,6 @@ require('dotenv').config();
 // cors - lets anyone talk to our server
 
 
-
 // allowing us to use the libraries
 const app = express();
 app.use(cors());
@@ -19,9 +18,15 @@ app.use(cors());
 // gets the PORT variable from our .env file
 const PORT = process.env.PORT || 3001;
 
+// ====================================== ROUTES ==============================
 
-// back end event listener on the location route
+// back end event listener on the routes
 app.get('/location', handleLocation);
+app.get('/weather', handleWeather);
+app.get('/trails', handleTrails);
+
+
+// ====================================== FUNCTIONS ============================
 
 function handleLocation(request, response){
 
@@ -40,7 +45,6 @@ function handleLocation(request, response){
   superagent.get(url)
     .query(queryParams)
     .then(resultsFromSuperagent => {
-      // console.log('these are my results from superagent:', resultsFromSuperagent.body)
       let geoData = resultsFromSuperagent.body;
       const obj = new Location(city, geoData);
       response.status(200).send(obj);
@@ -49,10 +53,6 @@ function handleLocation(request, response){
       response.status(500).send('Something went wrong with your location request, we are working on this!');
     })
 }
-
-
-// back end listener for the weather route
-app.get('/weather', handleWeather);
 
 function handleWeather(request, response){
 
@@ -68,7 +68,6 @@ function handleWeather(request, response){
     units: 'I',
     format: 'json',
   }
-
 
   superagent.get(url)
     .query(weatherQueryParams)
@@ -86,8 +85,6 @@ function handleWeather(request, response){
     })
 }
 
-
-app.get('/trails', handleTrails);
 
 function handleTrails(request, response){
 
@@ -128,7 +125,6 @@ function Location(location, obj){
 
 function Weather(object){
   this.time = new Date(object.valid_date).toDateString();
-  //if something is broken, datetime might not work, may need to access valid_date instead
   this.forecast = object.weather.description;
 }
 
@@ -144,7 +140,6 @@ function Trails(trailObject){
   this.condition_date = new Date(trailObject.conditionDate).toDateString();
   this.condition_time = new Date(trailObject.conditionDate).toLocaleTimeString();
 }
-
 
 
 

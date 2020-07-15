@@ -20,7 +20,7 @@ This application will utilize a front-end where the user can come to the webpage
   - cors
   - superagent
 
-  - (npm i will install for short term)
+  - (npm i will install dependencies for short term)
 
 - User should create a .env file, see envSamples
 
