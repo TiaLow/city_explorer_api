@@ -52,17 +52,38 @@ function handleLocation(request, response){
 
 
 // back end listener for the weather route
-app.get('/weather', (request, response) => {
+app.get('/weather', handleWeather);
 
-  let weather = require('./data/weather.json');
 
-  let weatherArray = weather.data.map(weatherTime =>{
-    return new Weather(weatherTime);
-  })
+function handleWeather(request, response){
 
-  response.send(weatherArray);
+  // console.log(request.query.latitude);
+  // let weather = require('./data/weather.json');
 
-});
+  let url = 'https://api.weatherbit.io/v2.0/forecast/daily';
+  let cityLatitude = request.query.latitude;
+  let cityLongitude= request.query.longitude;
+
+  let weatherQueryParams = {
+    key: process.env.WEATHER_API_KEY,
+    lat: cityLatitude,
+    lon: cityLongitude,
+    days: 8,
+    units: 'I',
+    format: 'json',
+  }
+
+  superagent.get(url)
+    .query(weatherQueryParams)
+    .then(results => {
+
+      let weatherArray = results.body.data.map(resultObject =>{
+        return new Weather(resultObject);
+      })
+      response.send(weatherArray);
+
+    })
+}
 
 
 function Location(location, obj){
@@ -73,7 +94,7 @@ function Location(location, obj){
 }
 
 function Weather(object){
-  this.time = new Date(object.datetime).toDateString();
+  this.time = new Date(object.valid_date).toDateString();
   //if something is broken, datetime might not work, may need to access valid_date instead
   this.forecast = object.weather.description;
 }

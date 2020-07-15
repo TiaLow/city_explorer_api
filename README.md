@@ -18,10 +18,13 @@ This application will utilize a front-end where the user can come to the webpage
   - express
   - dotenv
   - cors
+  - superagent
 
   - (npm i will install for short term)
 
-- User should create a .env file
+- User should create a .env file, see envSamples
+
+- User will need to request API keys from LocationIQ, Weatherbit, Hiking Project
 
 
 ## Architecture
@@ -50,7 +53,7 @@ This application will utilize a front-end where the user can come to the webpage
 
 07-14-2020 3:45pm - Refactored weather route to use .map(), utilized Date object to reformat date to include day
 
-07-14-2020 3:45pm - thing
+07-14-2020 5:15pm - Replaced fake data with call to location API, deployed to Heroku and confirmed everything is working using API key. Map renders. Neat!
 
 07-14-2020 3:45pm - thing
 
@@ -128,16 +131,16 @@ Estimate of time needed to complete: 1.5 hr
 
 Start time: 3:50pm
 
-Finish time: _____
+Finish time: 5:15pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1.5(ish) hrs
 
 
 3. Lab 7 - Weather
 
 Estimate of time needed to complete: 45 mins
 
-Start time: _____
+Start time: 5:35pm
 
 Finish time: _____
 
