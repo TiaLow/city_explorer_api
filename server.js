@@ -3,6 +3,7 @@
 // libraries
 const express = require('express');
 const cors = require('cors');
+const superagent = require('superagent');
 require('dotenv').config();
 // express - server library
 // dotenv - library that lets us access our secrets
@@ -20,23 +21,34 @@ const PORT = process.env.PORT || 3001;
 
 
 // back end event listener on the location route
-app.get('/location', (request, response) => {
+app.get('/location', handleLocation)
 
-  try{
+function handleLocation(request, response){
 
-    // request Object, query property
-    let city = request.query.city;
+  // request Object, query property
+  let city = request.query.city;
 
-    let geoData = require('./data/location.json');
+  let url = `https://us1.locationiq.com/v1/search.php`;
 
-    const obj = new Location(city, geoData);
-
-    response.status(200).send(obj);
-  } catch(error){
-    console.log('ERROR', error);
-    response.status(500).send('You did not enter a correct location! Please try again.');
+  let queryParams = {
+    key: process.env.GEOCODE_API_KEY,
+    q: city,
+    format: 'json',
+    limit: 1
   }
-});
+
+  superagent.get(url)
+    .query(queryParams)
+    .then(resultsFromSuperagent => {
+      // console.log('these are my results from superagent:', resultsFromSuperagent.body)
+      let geoData = resultsFromSuperagent.body;
+      const obj = new Location(city, geoData);
+      response.status(200).send(obj);
+    }).catch((error) => {
+      console.log('ERROR', error);
+      response.status(500).send('something went wrong, we are working on this');
+    })
+}
 
 
 // back end listener for the weather route
@@ -44,16 +56,9 @@ app.get('/weather', (request, response) => {
 
   let weather = require('./data/weather.json');
 
-  // let weatherArray = [];
-  // weather.data.forEach(weatherTime => {
-  //   weatherArray.push(new Weather(weatherTime));
-  // })
-
   let weatherArray = weather.data.map(weatherTime =>{
     return new Weather(weatherTime);
   })
-
-  // console.log(weatherArray);
 
   response.send(weatherArray);
 

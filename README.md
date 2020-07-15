@@ -26,12 +26,13 @@ This application will utilize a front-end where the user can come to the webpage
 
 ## Architecture
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
-- Using Express
-- Using dotenv
-- Using cors
-
+- Dependencies:
+  - express
+  - dotenv
+  - cors
+  - superagent
+  
 ## Change Log
-
 
 07-13-2020 3:35pm - Dependencies are established, files scaffolded 
 
@@ -47,12 +48,21 @@ This application will utilize a front-end where the user can come to the webpage
 
 07-13-2020 10:20pm - Confirmed error message syntax multiple times, not seeing epxlicit 500 errror, not quite sure how to test further. TBC! 
 
+07-14-2020 3:45pm - Refactored weather route to use .map(), utilized Date object to reformat date to include day
+
+07-14-2020 3:45pm - thing
+
+07-14-2020 3:45pm - thing
+
+07-14-2020 3:45pm - thing
+
 
 
 ## Credits and Collaborations
 
 - Worked on Lab 6 with Blake Romero
-- Chance Harmon contributed with help as TA 
+- Chance Harmon contributed with help as TA
+- Worked a bit on Lab 7 with Jen & Meghan
 
 
 ## Feature Tasks - Time Estimates
