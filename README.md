@@ -55,9 +55,9 @@ This application will utilize a front-end where the user can come to the webpage
 
 07-14-2020 5:15pm - Replaced fake data with call to location API, deployed to Heroku and confirmed everything is working using API key. Map renders. Neat!
 
-07-14-2020 3:45pm - thing
+07-14-2020 6:55pm - Used call to weather API to replace fake weather data, deployed to Heroku and confirmed everything is working. 
 
-07-14-2020 3:45pm - thing
+07-14-2020 7:35pm - Accessed trails API, deploying to Heroku to confirm functionality
 
 
 
@@ -142,18 +142,20 @@ Estimate of time needed to complete: 45 mins
 
 Start time: 5:35pm
 
-Finish time: _____
+Finish time: 6:55pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1.5(ish) hrs
 
 
 4. Lab 7 - Trails
 
 Estimate of time needed to complete: 45 mins
 
-Start time: _____
+Start time: 7:00pm
 
-Finish time: _____
+Finish time: 7:30pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 30 mins
+<hr>
+
 
