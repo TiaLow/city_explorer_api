@@ -5,7 +5,7 @@
 // dotenv - library that lets us access our secrets
 // cors - lets anyone talk to our server
 //  cors is middleware
-// superagent - 
+// superagent -
 // pg - facilitates communication with db
 
 const express = require('express');
@@ -19,7 +19,7 @@ require('dotenv').config();
 
 const pg = require('pg');
 const client = new pg.Client(process.env.DATABASE_URL);
-// the below will tell you if there is any issue in the connection to the database 
+// the below will tell you if there is any issue in the connection to the database
 client.on('error', err => {
   console.log('ERROR', err);
 });
@@ -32,19 +32,10 @@ const PORT = process.env.PORT || 3001;
 app.get('/location', handleLocation);
 app.get('/weather', handleWeather);
 app.get('/trails', handleTrails);
-// app.get('/show', showQueryInTable)
+app.get('/movies', handleMovies);
+
 
 // ====================================== FUNCTIONS ============================
-
-// function showQueryInTable(request, response){
-//   console.log('made it to the function');
-//   let sql = 'SELECT * FROM locations;';
-//   client.query(sql)
-//     .then(resultsFromPostgres => {
-//       let things = resultsFromPostgres.rows;
-//       response.send(things);
-//     }).catch(err => console.log(err));
-// }
 
 
 function handleLocation(request, response){
@@ -56,8 +47,8 @@ function handleLocation(request, response){
 
   client.query(sql, safeValue)
     .then (queryResults =>{
-    // console.log(queryResults);
-    // dont need > 0 because its either falsey or truthy
+
+
       if(queryResults.rowCount){
         console.log('more than 0! sending object from db');
         let dbLocationObj = queryResults.rows[0];
@@ -154,6 +145,31 @@ function handleTrails(request, response){
     })
 }
 
+function handleMovies(request, response){
+
+  let url = 'https://api.themoviedb.org/3/search/movie/';
+
+  let movieQueryParams = {
+    api_key: process.env.MOVIE_API_KEY,
+    query: request.query.search_query
+  }
+
+  superagent.get(url)
+    .query(movieQueryParams)
+    .then(movieResults => {
+
+      let movieArray = movieResults.body.results.map(resultObj =>{
+        return new Movies(resultObj);
+      })
+
+      response.status(200).send(movieArray);
+
+    }).catch((error) => {
+      console.log('ERROR', error);
+      response.status(500).send('Something went wrong with your movie request, we are working on this!');
+    })
+}
+
 
 // ====================================== CONSTRUCTORS ============================
 
@@ -182,6 +198,16 @@ function Trails(trailObject){
   this.condition_time = new Date(trailObject.conditionDate).toLocaleTimeString();
 }
 
+function Movies(movieObject){
+  this.title = movieObject.original_title;
+  this.overview = movieObject.overview;
+  this.average_votes = movieObject.vote_average;
+  this.total_votes = movieObject.vote_count;
+  this.image_url = 'https://image.tmdb.org/t/p/w500' + movieObject.poster_path;
+  //need w500 to get img (if you dont use it img doesnt show), but keeping w500 throws error in network tools
+  this.popularity = movieObject.popularity;
+  this.released_on = movieObject.release_date;
+}
 
 
 // ================================================================================

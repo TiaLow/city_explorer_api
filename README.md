@@ -71,6 +71,7 @@ This application will utilize a front-end where the user can come to the webpage
 - Chance Harmon contributed with help as TA
 - Worked a bit on Lab 7 with Jen & Meghan
 - Lab 8 with Beasley, Blake, Meghan, Amber, Jen
+- Lab 9 with Paul
 
 
 ## Feature Tasks - Time Estimates
@@ -194,6 +195,38 @@ Start time: 7:45am
 Finish time: _____
 
 Actual time needed to complete: _____
+<hr>
 
 
 
+1. Lab 9 - Movies
+
+Estimate of time needed to complete: 75 min (Tia- over)
+
+Start time: 3:30pm
+
+Finish time: _____
+
+Actual time needed to complete: _____
+
+
+2. Lab 9 - Yelp
+
+Estimate of time needed to complete: 60 min (Paul - 50)
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
+
+
+2. Lab 9 - Pagination
+
+Estimate of time needed to complete: 60 min (Tia- under)
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
