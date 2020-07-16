@@ -61,7 +61,9 @@ This application will utilize a front-end where the user can come to the webpage
 
 07-15-2020 3:35pm - Created schema.sql, tested table with dummy info. Accessed table in terminal, it worked booyah! 
 
-07-16-2020 7:35pm - Completed if/else statement for pull from database vs request to API. Confirmed functionality using local host. Deploying to Heroku now. 
+07-16-2020 7:35am - Completed if/else statement for pull from database vs request to API. Confirmed functionality using local host. Deploying to Heroku now. 
+
+07-16-2020 7:50am - Running push again to remove .env files from github
 
 ## Credits and Collaborations
 
