@@ -1,21 +1,26 @@
 'use strict';
 
 // libraries
-const express = require('express');
-const cors = require('cors');
-const superagent = require('superagent');
-require('dotenv').config();
 // express - server library
 // dotenv - library that lets us access our secrets
 // cors - lets anyone talk to our server
+// pg - facilitates communication with db
 
-
-// allowing us to use the libraries
+const express = require('express');
 const app = express();
+
+const cors = require('cors');
 app.use(cors());
 
+const superagent = require('superagent');
+require('dotenv').config();
 
-// gets the PORT variable from our .env file
+const pg = require('pg');
+const client = new pg.Client(process.env.DATABASE_URL);
+client.on('error', err => {
+  console.log('ERROR', err);
+});
+
 const PORT = process.env.PORT || 3001;
 
 // ====================================== ROUTES ==============================
@@ -24,15 +29,24 @@ const PORT = process.env.PORT || 3001;
 app.get('/location', handleLocation);
 app.get('/weather', handleWeather);
 app.get('/trails', handleTrails);
-
+// app.get('/show', showQueryInTable)
 
 // ====================================== FUNCTIONS ============================
 
+// function showQueryInTable(request, response){
+//   console.log('made it to the function');
+//   let sql = 'SELECT * FROM locations;';
+//   client.query(sql)
+//     .then(resultsFromPostgres => {
+//       let things = resultsFromPostgres.rows;
+//       response.send(things);
+//     }).catch(err => console.log(err));
+// }
+
+
 function handleLocation(request, response){
 
-  // request Object, query property
   let city = request.query.city;
-
   let url = `https://us1.locationiq.com/v1/search.php`;
 
   let queryParams = {
@@ -42,17 +56,39 @@ function handleLocation(request, response){
     limit: 1
   }
 
-  superagent.get(url)
-    .query(queryParams)
-    .then(resultsFromSuperagent => {
-      let geoData = resultsFromSuperagent.body;
-      const obj = new Location(city, geoData);
-      response.status(200).send(obj);
-    }).catch((error) => {
-      console.log('ERROR', error);
-      response.status(500).send('Something went wrong with your location request, we are working on this!');
+  let sql = 'SELECT * FROM locations WHERE search_query = $1;';
+  let safeValue = [city];
+
+  client.query(sql, safeValue)
+    .then (queryResults =>{
+      // console.log(queryResults);
+      if(queryResults.rowCount > 0){
+        console.log('more than 0! send object from db');
+        response.status(200).send(queryResults.rows[0]);
+      } else{
+        console.log('city not here yet, would go to API now')
+
+        superagent.get(url)
+          .query(queryParams)
+          .then(resultsFromSuperagent => {
+            let geoData = resultsFromSuperagent.body;
+            const localObj = new Location(city, geoData);
+
+            let sqlInsert = 'INSERT INTO locations (search_query, formatted_query, latitude, longitude) VALUES ($1, $2, $3, $4);';
+
+            let safeValue = [city, localObj.formatted_query, localObj.latitude, localObj.longitude];
+
+            client.query(sqlInsert, safeValue);
+
+            response.status(200).send(localObj);
+          }).catch((error) => {
+            console.log('ERROR', error);
+            response.status(500).send('Something went wrong with your location request, we are working on this!');
+          })
+      }
     })
 }
+
 
 function handleWeather(request, response){
 
@@ -147,6 +183,8 @@ function Trails(trailObject){
 
 
 // turn it on, see if PORT is listening
-app.listen(PORT, () => {
-  console.log(`listening on ${PORT}`);
-})
+client.connect()
+  .then(() => {
+    app.listen(PORT, () => console.log(`listening on ${PORT}`));
+  }).catch(err => console.log('ERROR', err));
+

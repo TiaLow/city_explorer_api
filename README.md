@@ -9,7 +9,7 @@ Labs 6-9
 ## Overview
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
 
-This application will utilize a front-end where the user can come to the webpage and search for a city that they would like information on. The user would like to be able to search for any city and get the relevant city information.
+This application will utilize a front-end where the user can come to the webpage and search for a city that they would like information on. The user would like to be able to search for any city and get the relevant city information. This app utilizes database storage and will send the results from the database if they already exist, or pull information from an API if not. 
 
 ## Getting Started
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
@@ -59,13 +59,18 @@ This application will utilize a front-end where the user can come to the webpage
 
 07-14-2020 7:35pm - Accessed trails API, deploying to Heroku to confirm functionality
 
+07-15-2020 3:35pm - Created schema.sql, tested table with dummy info. Accessed table in terminal, it worked booyah! 
 
+07-16-2020 7:35am - Completed if/else statement for pull from database vs request to API. Confirmed functionality using local host. Deploying to Heroku now. 
+
+07-16-2020 7:50am - Running push again to remove .env files from github
 
 ## Credits and Collaborations
 
 - Worked on Lab 6 with Blake Romero
 - Chance Harmon contributed with help as TA
 - Worked a bit on Lab 7 with Jen & Meghan
+- Lab 8 with Beasley, Blake, Meghan, Amber, Jen
 
 
 ## Feature Tasks - Time Estimates
@@ -157,5 +162,38 @@ Finish time: 7:30pm
 
 Actual time needed to complete: 30 mins
 <hr>
+
+1. Lab 8 - Database
+
+Estimate of time needed to complete: 1 hr
+
+Start time: 2:45pm
+
+Finish time: 3:35pm
+
+Actual time needed to complete: 50 mins
+
+
+2. Lab 8 - Server
+
+Estimate of time needed to complete: 1.5 hr
+
+Start time: 3:40pm
+
+Finish time: ..... (7:35am July 16)
+
+Actual time needed to complete: I worked on this feature off and on for a total of 4.5 hours or so. 
+
+
+3. Lab 8 - Deploy
+
+Estimate of time needed to complete: 20 mins
+
+Start time: 7:45am 
+
+Finish time: _____
+
+Actual time needed to complete: _____
+
 
 
