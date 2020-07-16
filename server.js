@@ -4,6 +4,8 @@
 // express - server library
 // dotenv - library that lets us access our secrets
 // cors - lets anyone talk to our server
+//  cors is middleware
+// superagent - 
 // pg - facilitates communication with db
 
 const express = require('express');
@@ -17,6 +19,7 @@ require('dotenv').config();
 
 const pg = require('pg');
 const client = new pg.Client(process.env.DATABASE_URL);
+// the below will tell you if there is any issue in the connection to the database 
 client.on('error', err => {
   console.log('ERROR', err);
 });
@@ -47,27 +50,29 @@ app.get('/trails', handleTrails);
 function handleLocation(request, response){
 
   let city = request.query.city;
-  let url = `https://us1.locationiq.com/v1/search.php`;
-
-  let queryParams = {
-    key: process.env.GEOCODE_API_KEY,
-    q: city,
-    format: 'json',
-    limit: 1
-  }
 
   let sql = 'SELECT * FROM locations WHERE search_query = $1;';
   let safeValue = [city];
 
   client.query(sql, safeValue)
     .then (queryResults =>{
-      // console.log(queryResults);
-      if(queryResults.rowCount > 0){
-        console.log('more than 0! send object from db');
-        response.status(200).send(queryResults.rows[0]);
+    // console.log(queryResults);
+    // dont need > 0 because its either falsey or truthy
+      if(queryResults.rowCount){
+        console.log('more than 0! sending object from db');
+        let dbLocationObj = queryResults.rows[0];
+        response.status(200).send(dbLocationObj);
       } else{
         console.log('city not here yet, would go to API now')
 
+        let url = `https://us1.locationiq.com/v1/search.php`;
+
+        let queryParams = {
+          key: process.env.GEOCODE_API_KEY,
+          q: city,
+          format: 'json',
+          limit: 1
+        }
         superagent.get(url)
           .query(queryParams)
           .then(resultsFromSuperagent => {
@@ -76,9 +81,9 @@ function handleLocation(request, response){
 
             let sqlInsert = 'INSERT INTO locations (search_query, formatted_query, latitude, longitude) VALUES ($1, $2, $3, $4);';
 
-            let safeValue = [city, localObj.formatted_query, localObj.latitude, localObj.longitude];
+            let safeValues = [city, localObj.formatted_query, localObj.latitude, localObj.longitude];
 
-            client.query(sqlInsert, safeValue);
+            client.query(sqlInsert, safeValues);
 
             response.status(200).send(localObj);
           }).catch((error) => {
@@ -181,7 +186,7 @@ function Trails(trailObject){
 
 // ================================================================================
 
-
+// connect to db
 // turn it on, see if PORT is listening
 client.connect()
   .then(() => {

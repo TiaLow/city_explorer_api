@@ -4,8 +4,8 @@ CREATE TABLE locations (
   id SERIAL PRIMARY KEY,
   search_query VARCHAR(255),
   formatted_query VARCHAR(255),
-  latitude VARCHAR(255),
-  longitude VARCHAR(255)
+  latitude NUMERIC(10, 7),
+  longitude NUMERIC(10, 7)
 );
 
 -- INSERT INTO locations (latitude, longitude) VALUES ('10', '20');
