@@ -225,7 +225,7 @@ Actual time needed to complete: 1 hr 25 mins
 
 Estimate of time needed to complete: 60 min (Tia- under)
 
-Start time: _____
+Start time: 7:15
 
 Finish time: _____
 

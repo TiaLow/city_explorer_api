@@ -172,14 +172,21 @@ function handleMovies(request, response){
 
 function handleYelp(request, response){
 
+  const numPerPage = 5;
+  const page = request.query.page || 1;
+  const start = ((page - 1) * numPerPage + 1);
+
   let url = 'https://api.yelp.com/v3/businesses/search';
 
   let restaurantsQueryParams = {
     // Authorization: 'Bearer ' + process.env.MOVIE_API_KEY,
     latitude: request.query.latitude,
-    longitude: request.query.longitude
+    longitude: request.query.longitude,
+    offset: start,
+    limit: numPerPage
   }
-//https://stackoverflow.com/questions/53507153/authentication-bearer-in-react
+
+  //https://stackoverflow.com/questions/53507153/authentication-bearer-in-react
   superagent.get(url)
     .set({'Authorization': 'Bearer ' + process.env.YELP_API_KEY})
     .query(restaurantsQueryParams)
@@ -195,7 +202,6 @@ function handleYelp(request, response){
       console.log('ERROR', error);
       response.status(500).send('Something went wrong with your restaurant request, we are working on this!');
     })
-
 
 }
 
