@@ -7,28 +7,29 @@ Labs 6-9
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
-<!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
 
-This application will utilize a front-end where the user can come to the webpage and search for a city that they would like information on. The user would like to be able to search for any city and get the relevant city information. This app utilizes database storage and will send the results from the database if they already exist, or pull information from an API if not. 
+This application will utilize a front-end where the user can come to the webpage and search for a city that they would like information on. The user would like to be able to search for any city and get the relevant city information. This app utilizes database storage and will send the results from the database if they already exist, or pull information from an API if not. The user will also be able to view movies and restaurants based on the location, with a pagination feature to originally display 5 restaurants and then add to that collection. 
 
 ## Getting Started
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
 
 - User should install libraries on your machine (npm install -S...)
   - express
   - dotenv
   - cors
   - superagent
+  - pg
 
   - (npm i will install dependencies for short term)
 
 - User should create a .env file, see envSamples
 
-- User will need to request API keys from LocationIQ, Weatherbit, Hiking Project
+- User will need to request API keys from LocationIQ, Weatherbit, Hiking Project, The Movie Database, Yelp
 
 
 ## Architecture
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+- Languages:
+  - JavaScript
+  - SQL
 - Dependencies:
   - express
   - dotenv
@@ -64,6 +65,10 @@ This application will utilize a front-end where the user can come to the webpage
 07-16-2020 7:35am - Completed if/else statement for pull from database vs request to API. Confirmed functionality using local host. Deploying to Heroku now. 
 
 07-16-2020 7:50am - Running push again to remove .env files from github
+
+07-16-2020 2:00pm-7:59pm - Glitch in the matrix, no time stamps (aka pair programming with Paul and I forgot to time stamp!)
+
+07-16-2020 8:00pm - Completed all features culminating in restaurant pagination, cleaned up code and console logs, deploying to Heroku to confirm functionality. 
 
 ## Credits and Collaborations
 
@@ -192,16 +197,16 @@ Estimate of time needed to complete: 20 mins
 
 Start time: 7:45am 
 
-Finish time: _____
+Finish time: 8:00am
 
-Actual time needed to complete: _____
+Actual time needed to complete: 15 mins
 <hr>
 
 
 
 1. Lab 9 - Movies
 
-Estimate of time needed to complete: 75 min (Tia- over)
+Estimate of time needed to complete: 75 min
 
 Start time: 3:30pm
 
@@ -212,7 +217,7 @@ Actual time needed to complete: 1.5 hr
 
 2. Lab 9 - Yelp
 
-Estimate of time needed to complete: 60 min (Paul - 50)
+Estimate of time needed to complete: 60 min
 
 Start time: 5:20pm
 
@@ -223,10 +228,10 @@ Actual time needed to complete: 1 hr 25 mins
 
 2. Lab 9 - Pagination
 
-Estimate of time needed to complete: 60 min (Tia- under)
+Estimate of time needed to complete: 60 min
 
-Start time: 7:15
+Start time: 7:15pm
 
-Finish time: _____
+Finish time: 7:45pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 30 mins
