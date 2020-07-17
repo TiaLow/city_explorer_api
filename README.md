@@ -205,20 +205,20 @@ Estimate of time needed to complete: 75 min (Tia- over)
 
 Start time: 3:30pm
 
-Finish time: _____
+Finish time: 5:00pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1.5 hr
 
 
 2. Lab 9 - Yelp
 
 Estimate of time needed to complete: 60 min (Paul - 50)
 
-Start time: _____
+Start time: 5:20pm
 
-Finish time: _____
+Finish time: 6:45pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1 hr 25 mins
 
 
 2. Lab 9 - Pagination

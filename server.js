@@ -33,7 +33,7 @@ app.get('/location', handleLocation);
 app.get('/weather', handleWeather);
 app.get('/trails', handleTrails);
 app.get('/movies', handleMovies);
-
+app.get('/yelp', handleYelp);
 
 // ====================================== FUNCTIONS ============================
 
@@ -170,6 +170,35 @@ function handleMovies(request, response){
     })
 }
 
+function handleYelp(request, response){
+
+  let url = 'https://api.yelp.com/v3/businesses/search';
+
+  let restaurantsQueryParams = {
+    // Authorization: 'Bearer ' + process.env.MOVIE_API_KEY,
+    latitude: request.query.latitude,
+    longitude: request.query.longitude
+  }
+//https://stackoverflow.com/questions/53507153/authentication-bearer-in-react
+  superagent.get(url)
+    .set({'Authorization': 'Bearer ' + process.env.YELP_API_KEY})
+    .query(restaurantsQueryParams)
+    .then (resultsFromSuper => {
+      console.log('sup! results');
+
+      let restaurantArray = resultsFromSuper.body.businesses.map(restaurant => {
+        return new Restaurant(restaurant);
+      })
+
+      response.status(200).send(restaurantArray);
+    }).catch((error) => {
+      console.log('ERROR', error);
+      response.status(500).send('Something went wrong with your restaurant request, we are working on this!');
+    })
+
+
+}
+
 
 // ====================================== CONSTRUCTORS ============================
 
@@ -209,6 +238,14 @@ function Movies(movieObject){
   this.released_on = movieObject.release_date;
 }
 
+function Restaurant(restaurantObj){
+  this.name = restaurantObj.name;
+  this.image_url = restaurantObj.image_url;
+  this.price = restaurantObj.price;
+  this.rating = restaurantObj.rating;
+  this.url = restaurantObj.url;
+}
+
 
 // ================================================================================
 
@@ -218,4 +255,8 @@ client.connect()
   .then(() => {
     app.listen(PORT, () => console.log(`listening on ${PORT}`));
   }).catch(err => console.log('ERROR', err));
+
+
+
+  //404 error handler
 
